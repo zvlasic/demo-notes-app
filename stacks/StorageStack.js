@@ -1,4 +1,4 @@
-import { Table } from "@serverless-stack/resources";
+import { Bucket, Table } from "@serverless-stack/resources";
 
 export function StorageStack({ stack, app }) {
     // Create the DynamoDB table
@@ -10,7 +10,12 @@ export function StorageStack({ stack, app }) {
         primaryIndex: { partitionKey: "userId", sortKey: "noteId" },
     });
 
+    const bucket = new Bucket(stack, "Uploads");
+
     return {
         table,
+        bucket
     };
 }
+
+
